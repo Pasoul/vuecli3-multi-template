@@ -11,7 +11,7 @@ glob.sync("./src/pages/**/main.js").forEach(path => {
 });
 module.exports = {
   //部署应用包时的基本 URL(解决build之后文件访问路径错误的问题)
-  publicPath: process.env.NODE_ENV === "production" ? "/dist/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/h5/dist/" : "/",
   pages,
   devServer: {
     proxy: {
