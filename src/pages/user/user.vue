@@ -1,5 +1,5 @@
 <template>
-  <div id="login">登录页<a href="./user">个人中心</a></div>
+  <div id="user">个人中心</div>
 </template>
 
 <script>

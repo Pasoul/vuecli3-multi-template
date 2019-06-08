@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div>
-      <a href="./login.html">登录</a> |
-      <a href="./about.html">关于我们</a>
+      <a href="./login">登录</a> |
+      <a href="./about">关于我们</a>
     </div>
     <img :src="require('@/assets/logo.png')" alt="" />
     <HelloWorld></HelloWorld>
@@ -17,7 +17,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

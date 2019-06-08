@@ -1,27 +1,25 @@
+const glob = require("glob");
+const pages = {};
+
+glob.sync("./src/pages/**/main.js").forEach(path => {
+  const chunk = path.split("./src/pages/")[1].split("/main.js")[0];
+  pages[chunk] = {
+    entry: path,
+    template: `public/${chunk}.html`,
+    chunks: ["chunk-vendors", "chunk-common", chunk]
+  };
+});
 module.exports = {
   //部署应用包时的基本 URL(解决build之后文件访问路径错误的问题)
   publicPath: process.env.NODE_ENV === "production" ? "/dist/" : "/",
-
-  pages: {
-    index: {
-      // page 的入口
-      entry: "src/pages/index/main.js",
-      // 模板来源
-      template: "public/index.html",
-      // 在 dist/index.html 的输出
-      filename: "index.html",
-      // 当使用 title 选项时，
-      // template 中的 title 标签需要时 <title><%= htmlWebpackPlugin.options.title %></title>
-      title: "Index Page",
-      // 在这个页面中包含的块，默认情况下会包含
-      // 提取出来的通用 chunk 和 vendor chunk。
-      chunks: ["chunk-vendors", "chunk-common", "index"]
-    },
-    // 当使用只有入口的字符串格式时，
-    // 模板会被推导为 `public/subpage.html`
-    // 并且如果找不到的话，就回退到 `public/index.html`。
-    // 输出文件名会被推导为 `subpage.html`。
-    login: "src/pages/login/login.js",
-    about: "src/pages/about/about.js"
+  pages,
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:8080",
+        changeOrigin: true,
+        pathRewrite: { "^/api": "" }
+      }
+    }
   }
 };
